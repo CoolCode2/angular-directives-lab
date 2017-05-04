@@ -17,16 +17,31 @@
           <h1 class="pull-left">Cards Against Assembly</h1>
 
           <scores></scores>
-        </header>
 
+        </header>
+<section id = "cards" class='container-fluid' ng-controller= "CardsController as cards">
+                  <!-- controller.postFunction -->
+<form ng-submit="cards.postCard()">
+    <div>
+      <label for="newCard-question">New Question:</label>
+      <input type="text"  
+      ng-model="cards.newCard.question">
+        <!-- controller.object.key -->
+        <!-- app.js = 'CardsController'.'self.newCard'.'question' -->
+
+    </div>
+<input type ="submit" value="submit">
+
+</form>
         <section id="cards" class="container-fluid" ng-controller="CardsController as cards">
           <div class="row">
-
+  
             <div class="col-sm-6 col-md-6 col-lg-4" ng-repeat="card in cards.all" >
               
-              <div class="card">
+              <div class="card" data-info="{{card._id}}">
                 <h4 class="card-title">{{card.question}}</h4>
                 <h6>Cards Against Assembly</h6>
+               
               </div>
             
             </div>

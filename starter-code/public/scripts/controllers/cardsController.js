@@ -11,6 +11,7 @@ function CardsController($http){
   self.all = [];
   self.newCard  = {};
   self.getCards = getCards;
+  self.postCard = postCard;
 
   function getCards(){
     $http
@@ -22,16 +23,24 @@ function CardsController($http){
     });
   }
 
-getCards();
+  getCards();
 //get all the cards store it in the array above
 
   function postCard(){
+    
     $http
-    .post('http://localhost:3000', self.newCard)
+    .post('http://localhost:3000/cards', self.newCard)
     .then(function(res){
-      console.log(self.newcard);
+      console.log(res.data);
       self.newCard = {};
+        resetCards();
     });
+
+  }
+  function resetCards(){
+    self.all = [];
+    console.log(self.all);
+    getCards();
   }
 
 }

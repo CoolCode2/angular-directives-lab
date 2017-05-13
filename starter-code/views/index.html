@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
         <link rel="stylesheet" href="styles/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/cardsController.js"></script>
     </head>
@@ -15,43 +15,43 @@
       <div class="container">
         <header class="navbar">
           <h1 class="pull-left">Cards Against Assembly</h1>
-
           <scores></scores>
-
         </header>
-<section id = "cards" class='container-fluid' ng-controller= "CardsController as cards">
-                  <!-- controller.postFunction -->
-<form ng-submit="cards.postCard()">
-    <div>
-      <label for="newCard-question">New Question:</label>
-      <input type="text"  
-      ng-model="cards.newCard.question">
-        <!-- controller.object.key -->
-        <!-- app.js = 'CardsController'.'self.newCard'.'question' -->
 
-    </div>
-<input type ="submit" value="submit">
-
-</form>
-        <section id="cards" class="container-fluid" ng-controller="CardsController as cards">
-          <div class="row">
-  
-            <div class="col-sm-6 col-md-6 col-lg-4" ng-repeat="card in cards.all" >
-              
-              <div class="card" data-info="{{card._id}}">
-                <h4 class="card-title">{{card.question}}</h4>
-                <h6>Cards Against Assembly</h6>
-               
-              </div>
-            
+        <section id = "cards" class='container-fluid' ng-controller= "CardsController as cardsCont">
+                    <!-- controller.postFunction -->
+        <form ng-submit="cardsCont.PostCard()" method="POST">
+            <div>
+              <label for="newCard-question">New Question:</label>
+              <input type="text" ng-model="cardsCont.newCard.question">    
             </div>
+          <input type ="submit" value="submit">
+        </form>
+        <!-- newCard = self.newCard = {}; -->
 
+
+<!-- cards displayed on the page -->
+          <div class="row">
+      <!-- redefine: card is cardsCont from CardsController  -->
+      
+          <div class="col-sm-6 col-md-md-6 col-lg-4" ng-repeat="card in cardsCont.all">
+            <div class='card'>
+  <!-- card is the Controller name from .js-->
+  <!-- .question from object in db -->
+              <h4 class="card-title">{{card.question}}
+               </h4>
+               <h6>Cards Against Assembly</h6>
+            </div>
+            <button ng-click="cardsCont.removeCard(card)">Remove</button>
           </div>
+          <!-- cards on page -->
+        
         </section>
 
       <footer>
         <p>Made with <span class="heart">♥︎</span> at General Assembly</p>
       </footer>
+      </section>
       </div>
     </body>
 </html>
